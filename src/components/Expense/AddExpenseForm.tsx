@@ -5,13 +5,15 @@ const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
   const { expenses, setExpenses } = useContext(AppContext);
 
-  const [id, setId] = useState<string>('');
+  const [id, setId] = useState<string>('1');
   const [name, setName] = useState<string>('');
   const [cost, setCost] = useState<number>(0);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setExpenses([...expenses, {id, name, cost}])
+
+    setExpenses([...expenses, { id, name, cost}])
+    setId(id+1)
   };
 
   return (
