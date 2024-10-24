@@ -3,7 +3,8 @@ import { AppContext } from "../context/AppContext";
 
 const Remaining = () => {
   const { expenses } = useContext(AppContext);
-  let budget = 1000;
+  const { budget } = useContext(AppContext);
+
   const alertShown = useRef(false);
 
   const totalExpenses = expenses.reduce((total, item) => {
