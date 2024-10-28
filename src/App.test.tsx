@@ -23,7 +23,7 @@ describe('Budget Tracker Functionality', () => {
     fireEvent.click(screen.getByText('Save'));
 
     // Verify the expense is added to the list
-    expect(screen.getByText('Test Expense2323')).toBeInTheDocument();
+    expect(screen.getByText('Test Expense')).toBeInTheDocument();
     expect(screen.getByText('$50')).toBeInTheDocument();
 
     // Verify the totals are updated
@@ -38,7 +38,7 @@ describe('Budget Tracker Functionality', () => {
     fireEvent.click(screen.getByText('Save'));
 
     // Delete the expense
-    fireEvent.click(screen.getByTestId('Delete'));
+    fireEvent.click(screen.getByLabelText('Delete'));
 
     // Verify the expense is removed from the list
     expect(screen.queryByText('Test Expense')).not.toBeInTheDocument();
