@@ -38,7 +38,7 @@ describe('Budget Tracker Functionality', () => {
     fireEvent.click(screen.getByText('Save'));
 
     // Delete the expense
-    fireEvent.click(screen.getByLabelText('Delete'));
+    fireEvent.click(screen.getByTestId('Delete'));
 
     // Verify the expense is removed from the list
     expect(screen.queryByText('Test Expense')).not.toBeInTheDocument();
