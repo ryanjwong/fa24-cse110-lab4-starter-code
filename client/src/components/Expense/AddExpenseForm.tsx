@@ -1,21 +1,20 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../context/AppContext";
-import { getValue } from "@testing-library/user-event/dist/utils";
 import { createExpense } from "../../utils/expense-utils";
+
 const AddExpenseForm = () => {
-  // Exercise: Consume the AppContext here
   const { expenses, setExpenses } = useContext(AppContext);
 
-  const [id, setId] = useState<string>('1');
+  const [id, setId] = useState<number>(1); // Start with numeric ID
   const [description, setDescription] = useState<string>('');
   const [cost, setCost] = useState<number>(0);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newExpense = {id, description, cost}
-    createExpense(newExpense)
-    setExpenses([...expenses, newExpense])
-    setId(id+1)
+    const newExpense = { id: id.toString(), description, cost };
+    createExpense(newExpense);
+    setExpenses([...expenses, newExpense]); // Append new expense to list
+    setId(id + 1); // Increment ID for next entry
   };
 
   return (
@@ -29,18 +28,18 @@ const AddExpenseForm = () => {
             className="form-control"
             id="name"
             value={description}
-            onChange={(e) => { setDescription(e.target.value) }}
+            onChange={(e) => setDescription(e.target.value)}
           ></input>
         </div>
         <div className="col-sm">
           <label htmlFor="cost">Cost</label>
           <input
             required
-            type="text"
+            type="number"
             className="form-control"
             id="cost"
             value={cost}
-            onChange={(e) => { setCost(parseInt(e.target.value)) }}
+            onChange={(e) => setCost(parseInt(e.target.value))}
           ></input>
         </div>
         <div className="col-sm">
