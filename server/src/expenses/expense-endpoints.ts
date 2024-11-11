@@ -25,4 +25,3 @@ export function createExpenseEndpoints(app: any, db: Database) {
    });
 
 }
-
