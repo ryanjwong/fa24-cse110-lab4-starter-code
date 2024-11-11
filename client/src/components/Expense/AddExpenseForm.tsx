@@ -5,16 +5,21 @@ import { createExpense } from "../../utils/expense-utils";
 const AddExpenseForm = () => {
   const { expenses, setExpenses } = useContext(AppContext);
 
-  const [id, setId] = useState<number>(1); // Start with numeric ID
+  const [id, setId] = useState<number>(1);
   const [description, setDescription] = useState<string>('');
   const [cost, setCost] = useState<number>(0);
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newExpense = { id: id.toString(), description, cost };
-    createExpense(newExpense);
-    setExpenses([...expenses, newExpense]); // Append new expense to list
-    setId(id + 1); // Increment ID for next entry
+
+    try {
+      await createExpense(newExpense); // Ensure any async behavior is awaited
+      setExpenses([...expenses, newExpense]);
+      setId(id + 1);
+    } catch (error) {
+      console.error("Failed to create expense:", error); // Logs error for debugging
+    }
   };
 
   return (
